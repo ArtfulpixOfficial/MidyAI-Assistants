@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/status", (req, res) => {
-  res.send("MidyAI Assistant is Live, U can send Get and Post Requests. Happy Assistant making");
+  res.send("MidyAI Assistant is Live, U can send Get and Post Requests. Happy Assistant production");
 });
 // Getting Assistants list
 app.get("/api/assistants", async (req, res) => {
