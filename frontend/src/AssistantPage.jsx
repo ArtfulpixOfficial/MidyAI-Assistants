@@ -18,7 +18,7 @@ export default function AssistantPage({
   useEffect(() => {
     async function startConversation() {
       const conversationData = await (
-        await fetch(`http://localhost:3001/api/newchat`, {
+        await fetch(`https://midy-ai-assistants.vercel.app/api/newchat`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -43,7 +43,7 @@ export default function AssistantPage({
       },
     ]);
     const conversationData = await (
-      await fetch(`http://localhost:3001/api/newMessage`, {
+      await fetch(`https://midy-ai-assistants.vercel.app/api/newMessage`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

@@ -6,7 +6,7 @@ export default function Assistants({ handleClick, setIsLoading }) {
   useEffect(() => {
     async function getAssistantsList() {
       const list = await (
-        await fetch(`http://localhost:3001/api/assistants`)
+        await fetch(`https://midy-ai-assistants.vercel.app/api/assistants`)
       ).json();
       setIsLoading(false);
       setAssistantsList(list);
