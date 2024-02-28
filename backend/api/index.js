@@ -18,7 +18,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/status", (req, res) => {
-  res.send("MidyAI Assistant is Live, U can send Get and Post Requests. Happy Assistant production");
+  res.send(
+    "MidyAI Assistant is Live, U can send Get and Post Requests. Happy Assistant production"
+  );
 });
 // Getting Assistants list
 app.get("/api/assistants", async (req, res) => {
@@ -77,6 +79,7 @@ app.post("/api/newMessage", async (req, res) => {
       content: req.body.content,
     });
     const messages = await chatProcess(req.body.threadId, req.body.assistantId);
+    console.log(messages.data);
     res.json({
       threadId: req.body.threadId,
       chatContent: messages.data,
