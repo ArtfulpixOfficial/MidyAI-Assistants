@@ -8,27 +8,31 @@
 }
 :root {
   --text-color: #ffffff;
-  --icon-color: #acacbe;
-  --icon-hover-bg: #5b5e71;
+  --icon-color: #dcdcdc;
+  --icon-hover-bg: #fff;
   --placeholder-color: #dcdcdc;
-  --outgoing-chat-bg: #343541;
-  --incoming-chat-bg: #444654;
-  --outgoing-chat-border: #343541;
-  --incoming-chat-border: #444654;
+  --outgoing-chat-bg: #171717;
+  --incoming-chat-bg: #20242c;
+  --outgoing-chat-border: #171717;
+  --incoming-chat-border: #20242c;
 }
 .light-mode {
-  --text-color: #343541;
-  --icon-color: #a9a9bc;
-  --icon-hover-bg: #f1f1f3;
+  --text-color: #171717;
+  --icon-color: #6c6c6c;
+  --icon-hover-bg: #171717;
   --placeholder-color: #6c6c6c;
   --outgoing-chat-bg: #ffffff;
   --incoming-chat-bg: #f7f7f8;
   --outgoing-chat-border: #ffffff;
   --incoming-chat-border: #d9d9e3;
 }
-body {
+
+.App {
   background: var(--outgoing-chat-bg);
   color: var(--text-color);
+  min-height: 100vh;
+  max-height: 100%;
+  /* transition: background 500ms; */
 }
 
 /* Chats container styling */
@@ -74,10 +78,12 @@ body {
 .chat-container .chat.outgoing {
   background: var(--outgoing-chat-bg);
   border: 1px solid var(--outgoing-chat-border);
+  transition: background 500ms;
 }
 .chat-container .chat.incoming {
   background: var(--incoming-chat-bg);
   border: 1px solid var(--incoming-chat-border);
+  transition: background 500ms;
 }
 .chat .chat-content {
   display: flex;
@@ -160,6 +166,7 @@ span.material-symbols-rounded {
   justify-content: center;
   background: var(--outgoing-chat-bg);
   border-top: 1px solid var(--incoming-chat-border);
+  transition: background 500ms;
 }
 .typing-container .typing-content {
   display: flex;
@@ -185,6 +192,7 @@ span.material-symbols-rounded {
   overflow-y: auto;
   background: var(--incoming-chat-bg);
   outline: 1px solid var(--incoming-chat-border);
+  transition: background 500ms;
 }
 .typing-textarea textarea::placeholder {
   color: var(--placeholder-color);
@@ -197,7 +205,7 @@ span.material-symbols-rounded {
   font-size: 1.35rem;
   align-items: center;
   justify-content: center;
-  color: var(--icon-color);
+  /* color: var(--icon-color); */
 }
 .typing-textarea span {
   position: absolute;
@@ -216,9 +224,11 @@ span.material-symbols-rounded {
   font-size: 1.4rem;
   background: var(--incoming-chat-bg);
   outline: 1px solid var(--incoming-chat-border);
+  transition: background 800ms;
 }
 .typing-controls span:hover {
   background: var(--icon-hover-bg);
+  color: var(--outgoing-chat-bg);
 }
 
 /* Reponsive Media Query */
@@ -280,6 +290,7 @@ span.material-symbols-rounded {
   flex-wrap: wrap;
 }
 .assistant {
+  visibility: visible;
   /* border: 2px solid #e55865; */
   display: flex;
   flex-direction: column;
@@ -289,17 +300,20 @@ span.material-symbols-rounded {
   padding-bottom: 30px;
   padding-right: 20px;
   padding-left: 20px;
-  background-color: #444654;
+  background: var(--incoming-chat-bg);
   cursor: pointer;
   font-size: 16px;
   border-radius: 16px;
+  transition: background 500ms;
 }
 
 .assistant:hover {
-  background-color: #5b5e71;
+  background: var(--text-color);
+  color: var(--outgoing-chat-bg);
 }
 .assistant img {
-  width: 115px;
+  width: 120px;
+  height: 130px;
   border-radius: 15px;
   margin-bottom: 8px;
 }
@@ -312,16 +326,18 @@ span.material-symbols-rounded {
 }
 
 .reset-btn {
-  font-size: 20px;
-  color: #fff;
-  background-color: #444654;
-  padding: 12px;
+  font-size: 16px;
+  color: var(--text-color);
+  background: var(--incoming-chat-bg);
+  padding: 10px;
   border-radius: 10px;
   cursor: pointer;
+  transition: background 500ms;
 }
 
 .reset-btn:hover {
-  background-color: #5b5e71;
+  background: var(--icon-hover-bg);
+  color: var(--outgoing-chat-bg);
 }
 
 .assistant-navbar {
@@ -363,4 +379,15 @@ span.material-symbols-rounded {
   display: flex;
   justify-content: center;
   margin-top: 15%;
+}
+
+#send-btn {
+  color: var(--text-color);
+  background: var(--incoming-chat-bg);
+  transition: background 500ms;
+}
+
+#send-btn:hover {
+  background: var(--icon-hover-bg);
+  color: var(--outgoing-chat-bg);
 }

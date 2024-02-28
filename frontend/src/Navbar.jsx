@@ -1,10 +1,10 @@
 export default function Navbar({ activeAssistant, reset }) {
   return (
-    <nav className={`navbar ${activeAssistant && "assistant-navbar"}`}>
+    <nav className={`navbar ${activeAssistant ? "assistant-navbar" : ""}`}>
       {activeAssistant ? (
         <>
           <span className="reset-btn" onClick={reset}>
-            ‹ Back
+            {`< Back`}
           </span>
           <span className="assistant-details">
             <img src={activeAssistant.image} alt="midyAI-logo" />

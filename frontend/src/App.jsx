@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import AssistantPage from "./AssistantPage";
 import Assistants from "./Assistants";
@@ -7,6 +7,7 @@ import Loader from "./Loader";
 import { RotatingLines } from "react-loader-spinner";
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [activeAssistant, setActiveAssistant] = useState(null);
   const [threadId, setThreadId] = useState(null);
@@ -39,12 +40,20 @@ function App() {
     ]);
   };
 
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    );
+    console.log(darkModeMediaQuery);
+    if (darkModeMediaQuery.matches) setIsDarkMode(true);
+    else setIsDarkMode(false);
+  }, []);
   return (
-    <div className="App">
+    <div className={`App ${isDarkMode ? "" : "light-mode"}`}>
       <Navbar reset={resetActiveAssistant} activeAssistant={activeAssistant} />
       {isLoading && (
         <div className="loader-element">
-          <RotatingLines strokeColor="#fff" />
+          <RotatingLines strokeColor={isDarkMode ? "#fff" : "#171717"} />
         </div>
       )}
       {activeAssistant ? (
@@ -55,6 +64,8 @@ function App() {
           setThreadId={setThreadId}
           activeAssistantChatContent={activeAssistantChatContent}
           setActiveAssistantChatContent={setActiveAssistantChatContent}
+          setIsDarkMode={setIsDarkMode}
+          isDarkMode={isDarkMode}
         />
       ) : (
         <Assistants handleClick={handleClick} setIsLoading={setIsLoading} />

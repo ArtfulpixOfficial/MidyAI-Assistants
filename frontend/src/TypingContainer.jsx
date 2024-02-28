@@ -1,4 +1,10 @@
-export default function TypingContainer({ prompt, setPrompt, handleClick }) {
+export default function TypingContainer({
+  prompt,
+  setPrompt,
+  handleClick,
+  setIsDarkMode,
+  isDarkMode,
+}) {
   return (
     <div className="typing-container">
       <div className="typing-content">
@@ -17,6 +23,15 @@ export default function TypingContainer({ prompt, setPrompt, handleClick }) {
             onClick={handleClick}
           >
             send
+          </span>
+        </div>
+        <div className="typing-controls">
+          <span
+            id="theme-btn"
+            className="material-symbols-rounded"
+            onClick={() => setIsDarkMode((prevMode) => !prevMode)}
+          >
+            {isDarkMode ? "dark_mode" : "light_mode"}
           </span>
         </div>
       </div>

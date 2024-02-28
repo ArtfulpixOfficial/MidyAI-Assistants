@@ -8,6 +8,8 @@ export default function AssistantPage({
   setThreadId,
   activeAssistantChatContent,
   setActiveAssistantChatContent,
+  setIsDarkMode,
+  isDarkMode,
 }) {
   const [prompt, setPrompt] = useState("");
   useEffect(() => {
@@ -84,6 +86,8 @@ export default function AssistantPage({
         prompt={prompt}
         setPrompt={setPrompt}
         handleClick={handleClick}
+        setIsDarkMode={setIsDarkMode}
+        isDarkMode={isDarkMode}
       />
     </>
   );

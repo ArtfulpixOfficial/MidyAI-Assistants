@@ -32,7 +32,7 @@ app.get("/api/assistants", async (req, res) => {
       id: assistant.id,
       name: assistant.name.split(" - ")[0],
       description: assistant.name.split(" - ")[1],
-      image: `https://i.pravatar.cc/300?img=${i + 1}`,
+      image: `${assistant.name.split(" - ")[0]}.jpg`,
     };
   });
 
