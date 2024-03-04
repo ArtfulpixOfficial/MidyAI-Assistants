@@ -313,8 +313,8 @@ span.material-symbols-rounded {
   color: var(--outgoing-chat-bg);
 }
 .assistant img {
-  width: 170px;
-  height: 175px;
+  width: 175px;
+  height: 180px;
   border-radius: 15px;
   margin-bottom: 8px;
 }
@@ -391,4 +391,8 @@ span.material-symbols-rounded {
 #send-btn:hover {
   background: var(--icon-hover-bg);
   color: var(--outgoing-chat-bg);
+}
+
+.midy {
+  order: -1;
 }
