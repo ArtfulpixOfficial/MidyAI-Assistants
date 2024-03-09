@@ -50,7 +50,11 @@ function App() {
   }, []);
   return (
     <div className={`App ${isDarkMode ? "" : "light-mode"}`}>
-      <Navbar reset={resetActiveAssistant} activeAssistant={activeAssistant} />
+      <Navbar
+        reset={resetActiveAssistant}
+        activeAssistant={activeAssistant}
+        isDarkMode={isDarkMode}
+      />
       {isLoading && (
         <div className="loader-element">
           <RotatingLines strokeColor={isDarkMode ? "#fff" : "#171717"} />

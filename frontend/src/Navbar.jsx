@@ -1,4 +1,4 @@
-export default function Navbar({ activeAssistant, reset }) {
+export default function Navbar({ activeAssistant, reset, isDarkMode }) {
   return (
     <nav className={`navbar ${activeAssistant ? "assistant-navbar" : ""}`}>
       {activeAssistant ? (
@@ -17,7 +17,10 @@ export default function Navbar({ activeAssistant, reset }) {
         </>
       ) : (
         <>
-          <img src="logo.png" alt="midyAI-logo" />
+          <img
+            src={isDarkMode ? "logo_dark.png" : "logo_light.svg"}
+            alt="midyAI-logo"
+          />
           <h1>MidyAI Assistants</h1>
         </>
       )}
