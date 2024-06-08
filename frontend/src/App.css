@@ -397,9 +397,9 @@ span.material-symbols-rounded {
   order: -1;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (min-width: 315px) and (max-width: 480px) {
   .App {
-    padding: 0 10px;
+    padding: 0 5px;
   }
   .navbar {
     font-size: 24px;
@@ -410,22 +410,22 @@ span.material-symbols-rounded {
   }
 
   .assistants-list {
-    padding: 10px;
+    padding: 5px;
     gap: 15px;
   }
   .assistant {
-    width: 150px;
-    padding-top: 15px;
-    padding-bottom: 20px;
-    font-size: 14px;
+    width: 130px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 12px;
   }
 
   .navbar:not(.assistant-navbar) {
     flex-direction: column;
   }
   .assistant img {
-    width: 130px;
-    height: 135px;
+    width: 115px;
+    height: 120px;
     margin-bottom: 5px;
   }
   .assistant p {
@@ -483,4 +483,3 @@ span.material-symbols-rounded {
     font-size: 1.1rem;
   }
 }
-
