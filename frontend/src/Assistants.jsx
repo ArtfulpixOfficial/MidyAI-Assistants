@@ -1,26 +1,27 @@
-import { useEffect, useState, Fragment } from "react";
+import { useEffect } from "react";
 import Assistant from "./Assistant";
-export default function Assistants({ handleClick, setIsLoading }) {
-  const [assistantsList, setAssistantsList] = useState([]);
+import { getAssistantsList } from "./api";
+import { useAssistantsContext } from "./AssistantsProvider";
+export default function Assistants() {
+  const { setIsLoading, setAssistantsList, assistantsList } =
+    useAssistantsContext();
+  // const [assistantsList, setAssistantsList] = useState([]);
 
   useEffect(() => {
-    async function getAssistantsList() {
-      const list = await (
-        await fetch(`${process.env.REACT_APP_BASE_URL}/api/assistants`)
-      ).json();
+    async function getAssistants() {
+      setIsLoading(true);
+      const list = await getAssistantsList();
       setIsLoading(false);
       setAssistantsList(list);
     }
-    setIsLoading(true);
-    getAssistantsList();
-  }, [setIsLoading]);
+
+    getAssistants();
+  }, [setIsLoading, setAssistantsList]);
 
   return (
     <div className="assistants-list">
       {assistantsList.map((assistant) => (
-        <Fragment key={assistant.id}>
-          <Assistant assistantObj={assistant} handleClick={handleClick} />
-        </Fragment>
+        <Assistant assistantObj={assistant} key={assistant.id} />
       ))}
     </div>
   );

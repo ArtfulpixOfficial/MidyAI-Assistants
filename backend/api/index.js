@@ -79,7 +79,7 @@ app.post("/api/newMessage", async (req, res) => {
       content: req.body.content,
     });
     const messages = await chatProcess(req.body.threadId, req.body.assistantId);
-    console.log(messages.data);
+
     res.json({
       threadId: req.body.threadId,
       chatContent: messages.data,

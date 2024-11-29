@@ -1,78 +1,25 @@
-import { useState, useEffect } from "react";
 import "./App.css";
 import AssistantPage from "./AssistantPage";
 import Assistants from "./Assistants";
 import Navbar from "./Navbar";
-import Loader from "./Loader";
+
 import { RotatingLines } from "react-loader-spinner";
-
+import { useAssistantsContext } from "./AssistantsProvider";
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [activeAssistant, setActiveAssistant] = useState(null);
-  const [threadId, setThreadId] = useState(null);
-  const [activeAssistantChatContent, setActiveAssistantChatContent] = useState([
-    {
-      content: [
-        {
-          type: "loading",
-          text: { value: <Loader />, annotations: [] },
-        },
-      ],
-      role: "assistant",
-    },
-  ]);
+  const { isLoading, activeAssistant } = useAssistantsContext();
 
-  const handleClick = function (assistantObj) {
-    setActiveAssistant(assistantObj);
-  };
-
-  const resetActiveAssistant = function () {
-    setActiveAssistant(null);
-    setThreadId(null);
-    setActiveAssistantChatContent([
-      {
-        content: [
-          { type: "loading", text: { value: <Loader />, annotations: [] } },
-        ],
-        role: "assistant",
-      },
-    ]);
-  };
-
-  useEffect(() => {
-    const darkModeMediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-    console.log(darkModeMediaQuery);
-    if (darkModeMediaQuery.matches) setIsDarkMode(true);
-    else setIsDarkMode(false);
-  }, []);
   return (
-    <div className={`App ${isDarkMode ? "" : "light-mode"}`}>
-      <Navbar
-        reset={resetActiveAssistant}
-        activeAssistant={activeAssistant}
-        isDarkMode={isDarkMode}
-      />
+    <div className={`App`}>
+      <Navbar />
       {isLoading && (
         <div className="loader-element">
-          <RotatingLines strokeColor={isDarkMode ? "#fff" : "#171717"} />
+          <RotatingLines strokeColor="#fff" />
         </div>
       )}
       {activeAssistant ? (
-        <AssistantPage
-          assistantData={activeAssistant}
-          key={activeAssistant.id}
-          threadId={threadId}
-          setThreadId={setThreadId}
-          activeAssistantChatContent={activeAssistantChatContent}
-          setActiveAssistantChatContent={setActiveAssistantChatContent}
-          setIsDarkMode={setIsDarkMode}
-          isDarkMode={isDarkMode}
-        />
+        <AssistantPage key={activeAssistant.id} />
       ) : (
-        <Assistants handleClick={handleClick} setIsLoading={setIsLoading} />
+        <Assistants />
       )}
     </div>
   );

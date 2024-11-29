@@ -1,4 +1,10 @@
-export default function Assistant({ assistantObj, handleClick }) {
+import { useAssistantsContext } from "./AssistantsProvider";
+export default function Assistant({ assistantObj }) {
+  const { setActiveAssistant } = useAssistantsContext();
+  const handleClick = function (assistantObj) {
+    console.log(assistantObj);
+    setActiveAssistant(assistantObj);
+  };
   return (
     <div
       className={`assistant ${assistantObj.name === "Midy" ? "midy" : ""}`}

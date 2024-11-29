@@ -1,94 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ChatContainer from "./ChatContainer";
 import TypingContainer from "./TypingContainer";
-import Loader from "./Loader";
-export default function AssistantPage({
-  assistantData,
-  threadId,
-  setThreadId,
-  activeAssistantChatContent,
-  setActiveAssistantChatContent,
-  setIsDarkMode,
-  isDarkMode,
-}) {
-  const [prompt, setPrompt] = useState("");
+
+import { startNewChat } from "./api";
+import { useAssistantsContext } from "./AssistantsProvider";
+export default function AssistantPage() {
+  const { activeAssistant, setThreadId, setActiveAssistantChatContent } =
+    useAssistantsContext();
+
   useEffect(() => {
-    document.title = `${assistantData.name} - ${assistantData.description}`;
+    document.title = `${activeAssistant.name} - ${activeAssistant.description}`;
     return () => (document.title = "MidyAI Assistants");
-  }, [assistantData]);
+  }, [activeAssistant]);
 
   useEffect(() => {
     async function startConversation() {
-      const conversationData = await (
-        await fetch(`${process.env.REACT_APP_BASE_URL}/api/newchat`, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ assistantId: assistantData.id }),
-        })
-      ).json();
+      const conversationData = await startNewChat(activeAssistant.id);
       setThreadId(conversationData.threadId);
       setActiveAssistantChatContent(conversationData.chatContent);
     }
     startConversation();
-  }, [assistantData, setThreadId, setActiveAssistantChatContent]);
-
-  const getResponse = async function (prompt) {
-    setActiveAssistantChatContent((v) => [
-      ...v,
-      {
-        content: [
-          { type: "loading", text: { value: <Loader />, annotations: [] } },
-        ],
-        role: "assistant",
-      },
-    ]);
-    const conversationData = await (
-      await fetch(`${process.env.REACT_APP_BASE_URL}/api/newMessage`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          threadId: threadId,
-          content: prompt,
-          assistantId: assistantData.id,
-        }),
-      })
-    ).json();
-    setActiveAssistantChatContent(conversationData.chatContent.reverse());
-  };
-
-  const handleClick = function () {
-    const currentPrompt = prompt.trim();
-    setPrompt("");
-    setActiveAssistantChatContent((v) => [
-      ...v,
-      {
-        content: [
-          { type: "text", text: { value: currentPrompt, annotations: [] } },
-        ],
-        role: "user",
-      },
-    ]);
-
-    getResponse(currentPrompt);
-  };
+  }, [activeAssistant, setThreadId, setActiveAssistantChatContent]);
 
   return (
     <>
-      <ChatContainer
-        activeAssistantChatContent={activeAssistantChatContent}
-        assistantData={assistantData}
-      />
-      <TypingContainer
-        prompt={prompt}
-        setPrompt={setPrompt}
-        handleClick={handleClick}
-        setIsDarkMode={setIsDarkMode}
-        isDarkMode={isDarkMode}
-      />
+      <ChatContainer />
+      <TypingContainer />
     </>
   );
 }

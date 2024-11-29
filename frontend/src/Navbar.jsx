@@ -1,4 +1,24 @@
-export default function Navbar({ activeAssistant, reset, isDarkMode }) {
+import { useAssistantsContext } from "./AssistantsProvider";
+import Loader from "./Loader";
+export default function Navbar() {
+  const {
+    setActiveAssistant,
+    setThreadId,
+    setActiveAssistantChatContent,
+    activeAssistant,
+  } = useAssistantsContext();
+  const reset = function () {
+    setActiveAssistant(null);
+    setThreadId(null);
+    setActiveAssistantChatContent([
+      {
+        content: [
+          { type: "loading", text: { value: <Loader />, annotations: [] } },
+        ],
+        role: "assistant",
+      },
+    ]);
+  };
   return (
     <nav className={`navbar ${activeAssistant ? "assistant-navbar" : ""}`}>
       {activeAssistant ? (
@@ -17,10 +37,7 @@ export default function Navbar({ activeAssistant, reset, isDarkMode }) {
         </>
       ) : (
         <>
-          <img
-            src={isDarkMode ? "logo_dark.png" : "logo_light.svg"}
-            alt="midyAI-logo"
-          />
+          <img src="logo_dark.png" alt="midyAI-logo" />
           <h1>MidyAI Assistants</h1>
         </>
       )}

@@ -1,10 +1,48 @@
-export default function TypingContainer({
-  prompt,
-  setPrompt,
-  handleClick,
-  setIsDarkMode,
-  isDarkMode,
-}) {
+import { useAssistantsContext } from "./AssistantsProvider";
+import { getConversationData } from "./api";
+import Loader from "./Loader";
+export default function TypingContainer() {
+  const {
+    prompt,
+    setPrompt,
+    setActiveAssistantChatContent,
+    threadId,
+    activeAssistant,
+  } = useAssistantsContext();
+
+  const getResponse = async function (prompt) {
+    setActiveAssistantChatContent((v) => [
+      ...v,
+      {
+        content: [
+          { type: "loading", text: { value: <Loader />, annotations: [] } },
+        ],
+        role: "assistant",
+      },
+    ]);
+    const conversationData = await getConversationData(
+      threadId,
+      prompt,
+      activeAssistant.id
+    );
+    setActiveAssistantChatContent(conversationData.chatContent.reverse());
+  };
+
+  const handleSendClick = function () {
+    const currentPrompt = prompt.trim();
+    setPrompt("");
+    setActiveAssistantChatContent((v) => [
+      ...v,
+      {
+        content: [
+          { type: "text", text: { value: currentPrompt, annotations: [] } },
+        ],
+        role: "user",
+      },
+    ]);
+    getResponse(currentPrompt);
+  };
+
   return (
     <div className="typing-container">
       <div className="typing-content">
@@ -20,18 +58,9 @@ export default function TypingContainer({
           <span
             id="send-btn"
             className="material-symbols-rounded"
-            onClick={handleClick}
+            onClick={handleSendClick}
           >
             send
-          </span>
-        </div>
-        <div className="typing-controls">
-          <span
-            id="theme-btn"
-            className="material-symbols-rounded"
-            onClick={() => setIsDarkMode((prevMode) => !prevMode)}
-          >
-            {isDarkMode ? "dark_mode" : "light_mode"}
           </span>
         </div>
       </div>
