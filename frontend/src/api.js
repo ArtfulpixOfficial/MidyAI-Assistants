@@ -5,6 +5,20 @@ const getAssistantsList = async function () {
   return list;
 };
 
+const getAssistantData = async function (id) {
+  console.log(id);
+  const assistantData = await (
+    await fetch(`${process.env.REACT_APP_BASE_URL}/api/getAssistantData`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ assistantId: id }),
+    })
+  ).json();
+  return assistantData;
+};
+
 const startNewChat = async function (id) {
   const conversationData = await (
     await fetch(`${process.env.REACT_APP_BASE_URL}/api/newchat`, {
@@ -34,4 +48,9 @@ const getConversationData = async function (threadId, content, assistantId) {
   ).json();
   return data;
 };
-export { getAssistantsList, startNewChat, getConversationData };
+export {
+  getAssistantsList,
+  startNewChat,
+  getConversationData,
+  getAssistantData,
+};

@@ -41,6 +41,14 @@ app.get("/api/assistants", async (req, res) => {
   res.json(assistantsData);
 });
 
+app.post("/api/getAssistantData", async (req, res) => {
+  console.log(req.body);
+  const assistantData = await openai.beta.assistants.retrieve(
+    req.body.assistantId
+  );
+  res.json(assistantData);
+});
+
 async function checkCurrentRunStatus(threadId, runId) {
   let runStatus;
   while (true) {

@@ -1,11 +1,13 @@
 import { useAssistantsContext } from "./AssistantsProvider";
 import Loader from "./Loader";
+import { Link } from "react-router-dom";
 export default function Navbar() {
   const {
     setActiveAssistant,
     setThreadId,
     setActiveAssistantChatContent,
     activeAssistant,
+    setAssistantsList,
   } = useAssistantsContext();
   const reset = function () {
     setActiveAssistant(null);
@@ -18,14 +20,23 @@ export default function Navbar() {
         role: "assistant",
       },
     ]);
+    setAssistantsList([]);
   };
   return (
     <nav className={`navbar ${activeAssistant ? "assistant-navbar" : ""}`}>
       {activeAssistant ? (
         <>
-          <span className="reset-btn" onClick={reset}>
-            {`< Back`}
-          </span>
+          <Link
+            to="/"
+            style={{
+              display: "flex",
+              textDecoration: "none",
+            }}
+          >
+            <span className="reset-btn" onClick={reset}>
+              {`< Back`}
+            </span>
+          </Link>
           <span className="assistant-details">
             <img src={activeAssistant.image} alt="midyAI-logo" />
             <h4>{activeAssistant.name}</h4>
@@ -37,7 +48,7 @@ export default function Navbar() {
         </>
       ) : (
         <>
-          <img src="logo_dark.png" alt="midyAI-logo" />
+          <img src="logo-new.png" alt="midyAI-logo" />
           <h1>MidyAI Assistants</h1>
         </>
       )}

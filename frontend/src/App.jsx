@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 
 import { RotatingLines } from "react-loader-spinner";
 import { useAssistantsContext } from "./AssistantsProvider";
+
 function App() {
   const { isLoading, activeAssistant } = useAssistantsContext();
 
@@ -16,11 +17,12 @@ function App() {
           <RotatingLines strokeColor="#fff" />
         </div>
       )}
-      {activeAssistant ? (
+      <Assistants />
+      {/* {activeAssistant ? (
         <AssistantPage key={activeAssistant.id} />
       ) : (
         <Assistants />
-      )}
+      )} */}
     </div>
   );
 }

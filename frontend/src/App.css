@@ -11,7 +11,7 @@
   --icon-color: #dcdcdc;
   --icon-hover-bg: #fff;
   --placeholder-color: #dcdcdc;
-  --outgoing-chat-bg: #171717;
+  --outgoing-chat-bg: #0e0c15;
   --incoming-chat-bg: #20242c;
   --outgoing-chat-border: #171717;
   --incoming-chat-border: #20242c;
@@ -397,6 +397,17 @@ span.material-symbols-rounded {
 
 .midy {
   order: -1;
+}
+
+.assistantLinkClass:link,
+.assistantLinkClass:visited,
+.assistantLinkClass:hover,
+.assistantLinkClass:active {
+  text-decoration: none;
+  color: var(--text-color);
+}
+.assistantLinkClass:hover {
+  color: var(--outgoing-chat-bg);
 }
 
 @media screen and (min-width: 300px) and (max-width: 480px) {

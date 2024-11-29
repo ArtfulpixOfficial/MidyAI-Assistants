@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Assistant from "./Assistant";
 import { getAssistantsList } from "./api";
 import { useAssistantsContext } from "./AssistantsProvider";
+import { Link } from "react-router-dom";
 export default function Assistants() {
   const { setIsLoading, setAssistantsList, assistantsList } =
     useAssistantsContext();
@@ -21,7 +22,13 @@ export default function Assistants() {
   return (
     <div className="assistants-list">
       {assistantsList.map((assistant) => (
-        <Assistant assistantObj={assistant} key={assistant.id} />
+        <Link
+          to={`assistant/${assistant.id}`}
+          key={assistant.id}
+          className="assistantLinkClass"
+        >
+          <Assistant assistantObj={assistant} />
+        </Link>
       ))}
     </div>
   );
