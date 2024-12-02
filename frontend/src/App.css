@@ -298,6 +298,7 @@ span.material-symbols-rounded {
   display: flex;
   flex-direction: column;
   width: 200px;
+  min-height: 100%;
   align-items: center;
   padding-top: 20px;
   padding-bottom: 30px;
