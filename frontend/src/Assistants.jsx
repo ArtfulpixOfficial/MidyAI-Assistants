@@ -12,8 +12,18 @@ export default function Assistants() {
     async function getAssistants() {
       setIsLoading(true);
       const list = await getAssistantsList();
+      console.log(list);
+      const tempArray = [];
+      list.forEach((el) => {
+        if (el.name === "Midy") {
+          tempArray.unshift(el);
+        } else {
+          tempArray.push(el);
+        }
+      });
+      console.log(tempArray);
       setIsLoading(false);
-      setAssistantsList(list);
+      setAssistantsList(tempArray);
     }
 
     getAssistants();
