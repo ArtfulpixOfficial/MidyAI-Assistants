@@ -29,6 +29,9 @@
 body {
   background-color: var(--outgoing-chat-bg);
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 .App {
   background: var(--outgoing-chat-bg);
   color: var(--text-color);
