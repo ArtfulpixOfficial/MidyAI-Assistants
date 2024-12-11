@@ -7,9 +7,7 @@ const ChatElement = function ({ data, role }) {
       <div className="chat-content">
         <div className="chat-details">
           <img
-            src={
-              role === "assistant" ? activeAssistant.image : `/logo_dark.png`
-            }
+            src={role === "assistant" ? activeAssistant.image : `/logo-new.png`}
             alt="user-img"
           />
           <div className="content">
