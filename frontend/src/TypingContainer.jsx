@@ -30,6 +30,7 @@ export default function TypingContainer() {
 
   const handleSendClick = function () {
     const currentPrompt = prompt.trim();
+    if (!currentPrompt) return;
     setPrompt("");
     setActiveAssistantChatContent((v) => [
       ...v,
@@ -54,6 +55,15 @@ export default function TypingContainer() {
             value={prompt}
             required
             onChange={(e) => setPrompt(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                if (!e.shiftKey) {
+                  e.preventDefault(); // Prevents default new line
+                  handleSendClick();
+                }
+                // If Shift+Enter, do nothing and let the default new line behavior happen
+              }
+            }}
           ></textarea>
           <span
             id="send-btn"
